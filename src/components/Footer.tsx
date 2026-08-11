@@ -165,7 +165,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
           </div>
 
           {/* Quick PDF Catalogue Download */}
-          <div>
+          {/* <div>
             <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Print Catalogue</h4>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.5 }}>
               View or download our original 7-page product brochure PDF anytime.
@@ -178,7 +178,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
               <BookOpen size={16} color="var(--accent-emerald)" />
               <span>Open PDF Viewer</span>
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Copyright */}

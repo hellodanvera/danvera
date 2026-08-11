@@ -96,10 +96,10 @@ export const App: React.FC = () => {
       />
 
       {/* Print PDF Catalogue Viewer Modal */}
-      <PdfCatalogueViewer
+      {/* <PdfCatalogueViewer
         isOpen={isPdfViewerOpen}
         onClose={() => setIsPdfViewerOpen(false)}
-      />
+      /> */}
 
       {/* Footer */}
       <Footer onOpenPdfViewer={() => setIsPdfViewerOpen(true)} />

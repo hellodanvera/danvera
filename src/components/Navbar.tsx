@@ -96,7 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <a href="#order-info" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', transition: 'color 0.2s' }}>
             How to Order
           </a>
-          <button
+          {/* <button
             onClick={onOpenPdfViewer}
             style={{
               background: 'transparent',
@@ -112,7 +112,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <BookOpen size={16} color="var(--accent-emerald)" />
             <span>PDF Catalogue</span>
-          </button>
+          </button> */}
         </div>
 
         {/* Action Controls */}

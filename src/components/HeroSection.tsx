@@ -107,14 +107,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
             <span>Order via WhatsApp ({DANVERA_INFO.whatsapp})</span>
           </a>
 
-          <button
+          {/* <button
             onClick={onOpenPdfViewer}
             className="btn-secondary"
             style={{ padding: '0.9rem 1.75rem', fontSize: '1.05rem' }}
           >
             <BookOpen size={20} color="var(--accent-emerald)" />
             <span>View PDF Catalogue</span>
-          </button>
+          </button> */}
         </div>
 
         {/* 4 Core Pillars Bar */}
