@@ -24,13 +24,13 @@ export const DANVERA_INFO = {
   tagline: "A serendipity of pure flavours",
   subTagline: "SMALL BATCH | FARM DIRECT",
   origin: "Karur, Tamil Nadu",
-  instagram: "@danveras_karur_suvai",
-  instagramUrl: "https://instagram.com/danveras_karur_suvai",
+  instagram: "@_danvera.in",
+  instagramUrl: "https://instagram.com/_danvera.in",
   whatsapp: "+91 90357 74801",
   whatsappClean: "919035774801",
   email: "hello@danvera.in",
   logoUrl: "/logo-circle.png",
-  pricingNote: "DM @danveras_karur_suvai or WhatsApp +91 90357 74801 for pricing & nationwide delivery"
+  pricingNote: "DM @_danvera.in or WhatsApp +91 90357 74801 for pricing & nationwide delivery"
 };
 
 export const CHAPTERS: ChapterInfo[] = [
