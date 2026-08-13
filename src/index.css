@@ -226,5 +226,57 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 clamp(1rem, 4vw, 1.5rem);
+  width: 100%;
 }
+
+/* Responsive Display Utilities */
+.hide-desktop {
+  display: none !important;
+}
+
+.hide-mobile {
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  .hide-desktop {
+    display: flex !important;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Mobile Scrollbar Hide Utility for Filter Pills */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mobile Slide-over Drawer Animations */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Strict horizontal overflow prevention */
+html, body, #root {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+

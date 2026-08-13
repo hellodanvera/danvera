@@ -21,25 +21,25 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
   });
 
   return (
-    <section id="catalogue" style={{ padding: '4.5rem 0' }}>
+    <section id="catalogue" style={{ padding: 'clamp(2.5rem, 5vw, 4.5rem) 0' }}>
       <div className="container">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <span className="badge-glow" style={{ marginBottom: '1rem', color: '#10b981', borderColor: 'rgba(16,185,129,0.3)' }}>
             <Sparkles size={14} />
             <span>AUTHENTIC PRODUCT CATALOGUE</span>
           </span>
-          <h2 style={{ fontSize: '2.75rem', fontWeight: 900, margin: '0.5rem 0 1rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 900, margin: '0.5rem 0 1rem' }}>
             Handcrafted <span className="gradient-text">Small-Batch Catalogue</span>
           </h2>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto' }}>
-            Explore Danvera's 5 authentic product chapters with product photos extracted directly from our catalogue. Click "Add to Bag" on any items to compile a pre-formatted WhatsApp order inquiry!
+          <p style={{ fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto' }}>
+            Explore Danvera's 5 authentic product chapters with product photos extracted directly from our catalogue. Click "Add to Order" on any items to compile a pre-formatted WhatsApp order inquiry!
           </p>
         </div>
 
         {/* Search & Filter Bar */}
         <div style={{
-          marginBottom: '2.5rem',
+          marginBottom: '2rem',
           display: 'flex',
           flexDirection: 'column',
           gap: '1.25rem',
@@ -71,13 +71,19 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
             />
           </div>
 
-          {/* Chapter Filter Tabs */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '0.6rem'
-          }}>
+          {/* Chapter Filter Tabs - Horizontally Scrollable Bar on Mobile */}
+          <div
+            className="no-scrollbar"
+            style={{
+              display: 'flex',
+              overflowX: 'auto',
+              width: '100%',
+              maxWidth: '100%',
+              paddingBottom: '0.4rem',
+              gap: '0.5rem',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
             <button
               onClick={() => setSelectedChapter('all')}
               style={{
@@ -89,7 +95,9 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                 fontWeight: 700,
                 fontSize: '0.85rem',
                 cursor: 'pointer',
-                transition: 'all 0.2s'
+                transition: 'all 0.2s',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
               }}
             >
               All Products ({PRODUCTS.length})
@@ -108,7 +116,9 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                   fontWeight: 700,
                   fontSize: '0.85rem',
                   cursor: 'pointer',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
                 }}
               >
                 Ch {ch.number}: {ch.title.split('&')[0]}
@@ -119,14 +129,14 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
 
         {/* Selected Chapter Intro Banner */}
         {typeof selectedChapter === 'number' && (
-          <div className="glass-panel" style={{ padding: '1.75rem 2rem', marginBottom: '2.5rem', borderLeft: '4px solid #10b981' }}>
+          <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '2rem', borderLeft: '4px solid #10b981' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               CHAPTER {selectedChapter} OVERVIEW
             </span>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0.25rem 0 0.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '0.25rem 0 0.5rem' }}>
               {CHAPTERS[selectedChapter - 1].title}
             </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5 }}>
               {CHAPTERS[selectedChapter - 1].description}
             </p>
           </div>
@@ -135,8 +145,8 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
         {/* Products Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(295px, 1fr))',
-          gap: '1.75rem'
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 270px), 1fr))',
+          gap: '1.5rem'
         }}>
           {filteredProducts.map((product) => {
             const inCart = cartItemIds.includes(product.id);
@@ -145,7 +155,7 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                 key={product.id}
                 className="glass-panel-interactive"
                 style={{
-                  padding: '1.25rem',
+                  padding: '1.1rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
@@ -156,10 +166,10 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                   {/* Product Image Container */}
                   <div style={{
                     width: '100%',
-                    height: '210px',
+                    height: 'clamp(170px, 25vw, 210px)',
                     borderRadius: '14px',
                     overflow: 'hidden',
-                    marginBottom: '1.25rem',
+                    marginBottom: '1.1rem',
                     background: '#0a0f1d',
                     position: 'relative',
                     border: '1px solid var(--border-color)'
@@ -175,7 +185,6 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                         transition: 'transform 0.5s ease'
                       }}
                       onError={(e) => {
-                        // Fallback image if file not rendered
                         (e.target as HTMLElement).style.display = 'none';
                       }}
                     />
@@ -183,14 +192,14 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                     {/* Category Badge overlay on image */}
                     <div style={{
                       position: 'absolute',
-                      top: '10px',
-                      left: '10px',
-                      padding: '0.25rem 0.65rem',
-                      borderRadius: '8px',
+                      top: '8px',
+                      left: '8px',
+                      padding: '0.2rem 0.55rem',
+                      borderRadius: '6px',
                       background: 'rgba(10, 15, 29, 0.85)',
                       backdropFilter: 'blur(8px)',
                       color: '#10b981',
-                      fontSize: '0.725rem',
+                      fontSize: '0.7rem',
                       fontWeight: 800,
                       textTransform: 'uppercase',
                       border: '1px solid rgba(16, 185, 129, 0.3)'
@@ -201,13 +210,13 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                     {product.tag && (
                       <div style={{
                         position: 'absolute',
-                        top: '10px',
-                        right: '10px',
-                        padding: '0.25rem 0.65rem',
-                        borderRadius: '8px',
+                        top: '8px',
+                        right: '8px',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
                         background: 'rgba(245, 158, 11, 0.9)',
                         color: '#ffffff',
-                        fontSize: '0.7rem',
+                        fontSize: '0.675rem',
                         fontWeight: 800
                       }}>
                         {product.tag}
@@ -216,16 +225,16 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                   </div>
 
                   {/* Title */}
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '0.5rem' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.4rem', lineHeight: 1.25 }}>
                     {product.name}
                   </h3>
 
                   {/* Description */}
                   <p style={{
-                    fontSize: '0.9rem',
+                    fontSize: '0.875rem',
                     color: 'var(--text-secondary)',
-                    lineHeight: 1.55,
-                    marginBottom: '1rem'
+                    lineHeight: 1.5,
+                    marginBottom: '0.85rem'
                   }}>
                     {product.description}
                   </p>
@@ -233,13 +242,13 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                   {/* Usage Tip */}
                   {product.usageTip && (
                     <div style={{
-                      padding: '0.65rem 0.85rem',
+                      padding: '0.6rem 0.75rem',
                       borderRadius: '10px',
                       background: 'rgba(255, 255, 255, 0.03)',
                       border: '1px solid var(--border-color)',
-                      fontSize: '0.8rem',
+                      fontSize: '0.775rem',
                       color: 'var(--text-muted)',
-                      marginBottom: '1.25rem',
+                      marginBottom: '1rem',
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '0.4rem'
@@ -252,30 +261,32 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
 
                 {/* Card Action Row */}
                 <div style={{
-                  paddingTop: '1rem',
+                  paddingTop: '0.85rem',
                   borderTop: '1px solid var(--border-color)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '0.5rem'
                 }}>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                     DM for Pricing
                   </span>
 
                   <button
                     onClick={() => onAddToCart(product)}
                     style={{
-                      padding: '0.55rem 1.1rem',
+                      padding: '0.5rem 1rem',
                       borderRadius: '9999px',
                       border: 'none',
                       background: inCart ? 'rgba(16, 185, 129, 0.18)' : 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                       color: inCart ? '#10b981' : '#ffffff',
                       fontWeight: 700,
-                      fontSize: '0.85rem',
+                      fontSize: '0.825rem',
                       cursor: 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '0.4rem',
+                      gap: '0.35rem',
                       transition: 'all 0.2s',
                       boxShadow: inCart ? 'none' : '0 4px 15px rgba(16, 185, 129, 0.3)'
                     }}
@@ -301,3 +312,4 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
     </section>
   );
 };
+

@@ -58,8 +58,8 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
     }}>
       <div className="glass-panel" style={{
         width: '100%',
-        maxWidth: '460px',
-        height: '100%',
+        maxWidth: '440px',
+        height: '100dvh',
         borderRadius: 0,
         display: 'flex',
         flexDirection: 'column',
@@ -67,28 +67,29 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
       }}>
         {/* Drawer Header */}
         <div style={{
-          padding: '1.25rem 1.5rem',
+          padding: '1rem 1.25rem',
           borderBottom: '1px solid var(--border-color)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           background: 'rgba(0, 0, 0, 0.2)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <div style={{
-              width: '36px',
-              height: '36px',
+              width: '34px',
+              height: '34px',
               borderRadius: '10px',
               background: 'rgba(16, 185, 129, 0.15)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexShrink: 0
             }}>
-              <ShoppingBag size={20} color="#10b981" />
+              <ShoppingBag size={18} color="#10b981" />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.2rem', margin: 0 }}>Your Order Inquiry Bag</h3>
-              <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>
+              <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: 1.2 }}>Your Order Inquiry Bag</h3>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 {cartItems.reduce((acc, it) => acc + it.quantity, 0)} total items selected
               </span>
             </div>
@@ -104,47 +105,50 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
               padding: '0.4rem',
               borderRadius: '50%'
             }}
+            aria-label="Close Order Bag Drawer"
           >
             <X size={20} />
           </button>
         </div>
 
         {/* Drawer Content */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem' }}>
+        <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
           {cartItems.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '4rem 1rem', color: 'var(--text-secondary)' }}>
-              <ShoppingBag size={48} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.5 }} />
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>Your Bag is Empty</h4>
-              <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', maxWidth: '280px', margin: '0 auto 1.5rem' }}>
+            <div style={{ textAlign: 'center', padding: '3.5rem 1rem', color: 'var(--text-secondary)' }}>
+              <ShoppingBag size={44} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.5 }} />
+              <h4 style={{ fontSize: '1.05rem', marginBottom: '0.5rem' }}>Your Bag is Empty</h4>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: '280px', margin: '0 auto 1.5rem' }}>
                 Explore the product catalogue and click "Add to Order" to build your custom WhatsApp inquiry!
               </p>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {cartItems.map((item) => (
                 <div
                   key={item.product.id}
                   style={{
-                    padding: '1rem',
-                    borderRadius: '14px',
+                    padding: '0.85rem',
+                    borderRadius: '12px',
                     background: 'rgba(255, 255, 255, 0.03)',
                     border: '1px solid var(--border-color)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '1rem'
+                    gap: '0.75rem'
                   }}
                 >
-                  <div style={{ flex: 1 }}>
-                    <span style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 800, textTransform: 'uppercase' }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <span style={{ fontSize: '0.675rem', color: '#10b981', fontWeight: 800, textTransform: 'uppercase' }}>
                       CH {item.product.chapter}
                     </span>
-                    <h5 style={{ fontSize: '1rem', fontWeight: 700, margin: '0.15rem 0' }}>{item.product.name}</h5>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.product.category}</span>
+                    <h5 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0.1rem 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {item.product.name}
+                    </h5>
+                    <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>{item.product.category}</span>
                   </div>
 
                   {/* Quantity controls */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,0,0,0.2)', padding: '0.2rem 0.5rem', borderRadius: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.2)', padding: '0.2rem 0.4rem', borderRadius: '8px', flexShrink: 0 }}>
                     <button
                       onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
                       style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
@@ -190,14 +194,14 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
         {/* Drawer Footer Actions */}
         {cartItems.length > 0 && (
           <div style={{
-            padding: '1.25rem 1.5rem',
+            padding: '1rem 1.25rem',
             borderTop: '1px solid var(--border-color)',
             background: 'rgba(0, 0, 0, 0.2)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.85rem'
+            gap: '0.75rem'
           }}>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>
               Order direct via WhatsApp or Instagram DM for fast delivery:
             </div>
 
@@ -209,8 +213,8 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
               style={{
                 background: '#25D366',
                 color: '#ffffff',
-                padding: '0.8rem 1.5rem',
-                fontSize: '0.95rem',
+                padding: '0.75rem 1.25rem',
+                fontSize: '0.9rem',
                 justifyContent: 'center'
               }}
             >
@@ -218,11 +222,11 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
               <span>Send Order via WhatsApp ({DANVERA_INFO.whatsapp})</span>
             </a>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
                 onClick={handleCopy}
                 className="btn-secondary"
-                style={{ flex: 1, padding: '0.5rem 0.8rem', fontSize: '0.825rem', justifyContent: 'center' }}
+                style={{ flex: '1 1 140px', padding: '0.5rem 0.75rem', fontSize: '0.8rem', justifyContent: 'center' }}
               >
                 {copied ? <Check size={14} color="#10b981" /> : <Copy size={14} />}
                 <span>{copied ? 'Copied Message' : 'Copy Message'}</span>
@@ -233,7 +237,7 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"
-                style={{ padding: '0.5rem 0.8rem', fontSize: '0.825rem', justifyContent: 'center' }}
+                style={{ flex: '1 1 120px', padding: '0.5rem 0.75rem', fontSize: '0.8rem', justifyContent: 'center' }}
               >
                 <Instagram size={14} color="#e1306c" />
                 <span>DM Instagram</span>
@@ -245,3 +249,4 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
     </div>
   );
 };
+

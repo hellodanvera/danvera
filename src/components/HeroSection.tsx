@@ -9,7 +9,7 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => {
   return (
     <section style={{
-      padding: '5rem 0 3.5rem',
+      padding: 'clamp(2.5rem, 6vw, 5rem) 0 3.5rem',
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -20,6 +20,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
         left: '50%',
         transform: 'translateX(-50%)',
         width: '650px',
+        maxWidth: '100%',
         height: '400px',
         background: 'radial-gradient(ellipse at center, rgba(16, 185, 129, 0.12) 0%, rgba(245, 158, 11, 0.08) 40%, rgba(0, 0, 0, 0) 80%)',
         filter: 'blur(60px)',
@@ -33,9 +34,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '0.75rem',
+          gap: '0.65rem',
           flexWrap: 'wrap',
-          marginBottom: '1.5rem'
+          marginBottom: '1.25rem'
         }}>
           <span className="badge-glow" style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)', color: '#10b981' }}>
             <Sparkles size={14} />
@@ -48,7 +49,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
 
         {/* Main Headline */}
         <h1 style={{
-          fontSize: 'clamp(2.75rem, 6vw, 4.75rem)',
+          fontSize: 'clamp(2rem, 5.5vw, 4.75rem)',
           fontWeight: 900,
           lineHeight: 1.1,
           maxWidth: '920px',
@@ -64,7 +65,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
 
         {/* Subtitle */}
         <p style={{
-          fontSize: '1.2rem',
+          fontSize: 'clamp(0.95rem, 2.5vw, 1.2rem)',
           color: 'var(--text-secondary)',
           maxWidth: '750px',
           margin: '0 auto 2.25rem',
@@ -78,7 +79,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '1rem',
+          gap: '0.85rem',
           flexWrap: 'wrap',
           marginBottom: '3.5rem'
         }}>
@@ -87,9 +88,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
             className="btn-primary"
             style={{
               background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-              padding: '0.9rem 2.2rem',
-              fontSize: '1.05rem',
-              boxShadow: '0 4px 20px rgba(16, 185, 129, 0.35)'
+              padding: '0.85rem 1.8rem',
+              fontSize: '1rem',
+              boxShadow: '0 4px 20px rgba(16, 185, 129, 0.35)',
+              justifyContent: 'center'
             }}
           >
             <span>Explore Product Catalogue</span>
@@ -101,67 +103,58 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"
-            style={{ padding: '0.9rem 2rem', fontSize: '1.05rem' }}
+            style={{ padding: '0.85rem 1.6rem', fontSize: '1rem', justifyContent: 'center' }}
           >
             <MessageCircle size={20} color="#25D366" />
             <span>Order via WhatsApp ({DANVERA_INFO.whatsapp})</span>
           </a>
-
-          {/* <button
-            onClick={onOpenPdfViewer}
-            className="btn-secondary"
-            style={{ padding: '0.9rem 1.75rem', fontSize: '1.05rem' }}
-          >
-            <BookOpen size={20} color="var(--accent-emerald)" />
-            <span>View PDF Catalogue</span>
-          </button> */}
         </div>
 
         {/* 4 Core Pillars Bar */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '1.25rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))',
+          gap: '1rem',
           maxWidth: '1100px',
           margin: '0 auto'
         }}>
-          <div className="glass-panel" style={{ padding: '1.35rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ padding: '0.75rem', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
-              <ShieldCheck size={24} />
+          <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <div style={{ padding: '0.65rem', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', flexShrink: 0 }}>
+              <ShieldCheck size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700 }}>Stone-Ground</h4>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Traditional slow friction</span>
+              <h4 style={{ fontSize: '0.975rem', fontWeight: 700 }}>Stone-Ground</h4>
+              <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>Traditional slow friction</span>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.35rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ padding: '0.75rem', borderRadius: '12px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
-              <CheckCircle2 size={24} />
+          <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <div style={{ padding: '0.65rem', borderRadius: '12px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', flexShrink: 0 }}>
+              <CheckCircle2 size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700 }}>Small-Batch</h4>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Milled fresh for every batch</span>
+              <h4 style={{ fontSize: '0.975rem', fontWeight: 700 }}>Small-Batch</h4>
+              <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>Milled fresh for every batch</span>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.35rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ padding: '0.75rem', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
-              <ShieldCheck size={24} />
+          <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <div style={{ padding: '0.65rem', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', flexShrink: 0 }}>
+              <ShieldCheck size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700 }}>Farm Direct</h4>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Direct from Karur farms</span>
+              <h4 style={{ fontSize: '0.975rem', fontWeight: 700 }}>Farm Direct</h4>
+              <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>Direct from Karur farms</span>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.35rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ padding: '0.75rem', borderRadius: '12px', background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899' }}>
-              <Sparkles size={24} />
+          <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <div style={{ padding: '0.65rem', borderRadius: '12px', background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899', flexShrink: 0 }}>
+              <Sparkles size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700 }}>No Additives</h4>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>100% Pure & Natural</span>
+              <h4 style={{ fontSize: '0.975rem', fontWeight: 700 }}>No Additives</h4>
+              <span style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>100% Pure & Natural</span>
             </div>
           </div>
         </div>
@@ -169,3 +162,4 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
     </section>
   );
 };
+

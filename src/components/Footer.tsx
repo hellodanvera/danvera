@@ -11,16 +11,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
     <footer style={{
       background: 'var(--bg-secondary)',
       borderTop: '1px solid var(--border-color)',
-      padding: '4rem 0 2rem',
-      marginTop: '4rem',
+      padding: 'clamp(2.5rem, 5vw, 4rem) 0 2rem',
+      marginTop: '3.5rem',
       color: 'var(--text-primary)'
     }}>
       <div className="container">
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '2.5rem',
-          marginBottom: '3.5rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+          gap: '2rem',
+          marginBottom: '3rem'
         }}>
           {/* Brand Column with Circular Logo */}
           <div>
@@ -144,41 +144,25 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
             <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Orders & Contact</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Mail size={16} color="var(--accent-emerald)" />
-                <a href={`mailto:${DANVERA_INFO.email}`} style={{ color: 'inherit', textDecoration: 'none', fontWeight: 600 }}>
+                <Mail size={16} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
+                <a href={`mailto:${DANVERA_INFO.email}`} style={{ color: 'inherit', textDecoration: 'none', fontWeight: 600, wordBreak: 'break-all' }}>
                   {DANVERA_INFO.email}
                 </a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Instagram size={16} color="#e1306c" />
+                <Instagram size={16} color="#e1306c" style={{ flexShrink: 0 }} />
                 <span>DM {DANVERA_INFO.instagram}</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <MessageCircle size={16} color="#25D366" />
+                <MessageCircle size={16} color="#25D366" style={{ flexShrink: 0 }} />
                 <span>WhatsApp {DANVERA_INFO.whatsapp}</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <MapPin size={16} color="var(--accent-emerald)" />
+                <MapPin size={16} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
                 <span>Karur Suvai, Tamil Nadu</span>
               </li>
             </ul>
           </div>
-
-          {/* Quick PDF Catalogue Download */}
-          {/* <div>
-            <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Print Catalogue</h4>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.5 }}>
-              View or download our original 7-page product brochure PDF anytime.
-            </p>
-            <button
-              onClick={onOpenPdfViewer}
-              className="btn-secondary"
-              style={{ width: '100%', justifyContent: 'center', padding: '0.6rem 1rem', fontSize: '0.85rem' }}
-            >
-              <BookOpen size={16} color="var(--accent-emerald)" />
-              <span>Open PDF Viewer</span>
-            </button>
-          </div> */}
         </div>
 
         {/* Copyright */}
@@ -191,7 +175,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
           fontSize: '0.825rem',
           color: 'var(--text-secondary)',
           flexWrap: 'wrap',
-          gap: '1rem'
+          gap: '0.85rem'
         }}>
           <span>&copy; {new Date().getFullYear()} Danvera. Small Batch | Farm Direct. All rights reserved.</span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
@@ -202,3 +186,4 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
     </footer>
   );
 };
+
