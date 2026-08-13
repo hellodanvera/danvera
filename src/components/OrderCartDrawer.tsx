@@ -33,7 +33,7 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
     cartItems.forEach((item, index) => {
       text += `${index + 1}. ${item.product.name} (Qty: ${item.quantity})\n`;
     });
-    text += `\nPlease share pricing, availability, and delivery details for Karur / shipping. Thank you!`;
+    text += `\nPlease share pricing, availability, and delivery details for shipping.\n\nThank you!`;
     return text;
   };
 
