@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { X, Trash2, MessageCircle, Copy, Check, ShoppingBag, Plus, Minus, ArrowRight, Instagram } from 'lucide-react';
-import { ProductItem, DANVERA_INFO } from '../data/danveraCatalogue';
+import { X, Trash2, MessageCircle, Copy, Check, ShoppingBag, Plus, Minus, Instagram } from 'lucide-react';
+import { ProductItem, PriceOption, DANVERA_INFO } from '../data/danveraCatalogue';
 
 export interface CartItem {
   product: ProductItem;
+  selectedOption: PriceOption;
   quantity: number;
 }
 
@@ -11,7 +12,7 @@ interface OrderCartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   cartItems: CartItem[];
-  onUpdateQuantity: (productId: string, qty: number) => void;
+  onUpdateQuantity: (productId: string, weight: string, qty: number) => void;
   onClearCart: () => void;
 }
 
@@ -26,14 +27,23 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
 
   if (!isOpen) return null;
 
+  const totalEstimate = cartItems.reduce(
+    (sum, item) => sum + item.selectedOption.price * item.quantity,
+    0
+  );
+
   const generateWhatsAppMessage = () => {
-    if (cartItems.length === 0) return 'Hello Danvera! I would like to inquire about your product pricing and catalogue.';
-    
+    if (cartItems.length === 0) {
+      return 'Hello Danvera! I would like to inquire about your product pricing and catalogue.';
+    }
+
     let text = `Hello Danvera! I would like to order the following small-batch products:\n\n`;
     cartItems.forEach((item, index) => {
-      text += `${index + 1}. ${item.product.name} (Qty: ${item.quantity})\n`;
+      const lineSubtotal = item.selectedOption.price * item.quantity;
+      text += `${index + 1}. ${item.product.name} (${item.selectedOption.weight}) - Qty: ${item.quantity} @ ₹${item.selectedOption.price} = ₹${lineSubtotal}\n`;
     });
-    text += `\nPlease share pricing, availability, and delivery details for shipping.\n\nThank you!`;
+    text += `\n*Estimated Total Order Value: ₹${totalEstimate.toLocaleString('en-IN')}*\n`;
+    text += `\nPlease confirm product availability and shipping details.\n\nThank you!`;
     return text;
   };
 
@@ -88,9 +98,9 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
               <ShoppingBag size={18} color="#10b981" />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: 1.2 }}>Your Order Inquiry Bag</h3>
+              <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: 1.2 }}>Your Order Bag</h3>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                {cartItems.reduce((acc, it) => acc + it.quantity, 0)} total items selected
+                {cartItems.reduce((acc, it) => acc + it.quantity, 0)} items &bull; Total ₹{totalEstimate.toLocaleString('en-IN')}
               </span>
             </div>
           </div>
@@ -123,50 +133,86 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-              {cartItems.map((item) => (
-                <div
-                  key={item.product.id}
-                  style={{
-                    padding: '0.85rem',
-                    borderRadius: '12px',
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid var(--border-color)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '0.75rem'
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <span style={{ fontSize: '0.675rem', color: '#10b981', fontWeight: 800, textTransform: 'uppercase' }}>
-                      CH {item.product.chapter}
-                    </span>
-                    <h5 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0.1rem 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {item.product.name}
-                    </h5>
-                    <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>{item.product.category}</span>
-                  </div>
+              {cartItems.map((item) => {
+                const lineSubtotal = item.selectedOption.price * item.quantity;
+                return (
+                  <div
+                    key={`${item.product.id}-${item.selectedOption.weight}`}
+                    style={{
+                      padding: '0.85rem',
+                      borderRadius: '12px',
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px solid var(--border-color)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '0.75rem'
+                    }}
+                  >
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.15rem' }}>
+                        <span style={{ fontSize: '0.675rem', color: '#10b981', fontWeight: 800, textTransform: 'uppercase' }}>
+                          {item.product.category}
+                        </span>
+                        <span style={{
+                          fontSize: '0.65rem',
+                          background: 'rgba(16,185,129,0.12)',
+                          color: '#10b981',
+                          padding: '0.1rem 0.4rem',
+                          borderRadius: '4px',
+                          fontWeight: 700
+                        }}>
+                          {item.selectedOption.weight}
+                        </span>
+                      </div>
+                      <h5 style={{ fontSize: '0.925rem', fontWeight: 700, margin: '0.1rem 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {item.product.name}
+                      </h5>
+                      <span style={{ fontSize: '0.775rem', color: '#10b981', fontWeight: 700 }}>
+                        ₹{item.selectedOption.price} &times; {item.quantity} = <strong>₹{lineSubtotal}</strong>
+                      </span>
+                    </div>
 
-                  {/* Quantity controls */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.2)', padding: '0.2rem 0.4rem', borderRadius: '8px', flexShrink: 0 }}>
-                    <button
-                      onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
-                      style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
-                    >
-                      <Minus size={14} />
-                    </button>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 800, minWidth: '18px', textAlign: 'center' }}>
-                      {item.quantity}
-                    </span>
-                    <button
-                      onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
-                      style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
-                    >
-                      <Plus size={14} />
-                    </button>
+                    {/* Quantity controls */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.2)', padding: '0.2rem 0.4rem', borderRadius: '8px', flexShrink: 0 }}>
+                      <button
+                        onClick={() => onUpdateQuantity(item.product.id, item.selectedOption.weight, item.quantity - 1)}
+                        style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
+                      >
+                        <Minus size={14} />
+                      </button>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 800, minWidth: '18px', textAlign: 'center' }}>
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => onUpdateQuantity(item.product.id, item.selectedOption.weight, item.quantity + 1)}
+                        style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
+                      >
+                        <Plus size={14} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
+
+              {/* Total Summary Box */}
+              <div style={{
+                padding: '0.85rem 1rem',
+                borderRadius: '12px',
+                background: 'rgba(16, 185, 129, 0.08)',
+                border: '1px solid rgba(16, 185, 129, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginTop: '0.5rem'
+              }}>
+                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  Total Estimated Price
+                </span>
+                <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#10b981' }}>
+                  ₹{totalEstimate.toLocaleString('en-IN')}
+                </span>
+              </div>
 
               <button
                 onClick={onClearCart}
@@ -219,7 +265,7 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
               }}
             >
               <MessageCircle size={18} fill="#ffffff" />
-              <span>Send Order via WhatsApp ({DANVERA_INFO.whatsapp})</span>
+              <span>Send Order via WhatsApp (₹{totalEstimate.toLocaleString('en-IN')})</span>
             </a>
 
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -249,4 +295,3 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
     </div>
   );
 };
-

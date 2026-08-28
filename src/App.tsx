@@ -8,7 +8,7 @@ import { OrderInfoSection } from './components/OrderInfoSection';
 import { OrderCartDrawer, CartItem } from './components/OrderCartDrawer';
 import { PdfCatalogueViewer } from './components/PdfCatalogueViewer';
 import { Footer } from './components/Footer';
-import { ProductItem } from './data/danveraCatalogue';
+import { ProductItem, PriceOption } from './data/danveraCatalogue';
 
 export const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -24,15 +24,17 @@ export const App: React.FC = () => {
     }
   }, [darkMode]);
 
-  const handleAddToCart = (product: ProductItem) => {
+  const handleAddToCart = (product: ProductItem, option: PriceOption) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      const existingIndex = prev.findIndex(
+        (item) => item.product.id === product.id && item.selectedOption.weight === option.weight
+      );
+      if (existingIndex > -1) {
+        return prev.map((item, idx) =>
+          idx === existingIndex ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prev, { product, quantity: 1 }];
+        return [...prev, { product, selectedOption: option, quantity: 1 }];
       }
     });
 
@@ -50,12 +52,18 @@ export const App: React.FC = () => {
     setIsCartOpen(true);
   };
 
-  const handleUpdateQuantity = (productId: string, qty: number) => {
+  const handleUpdateQuantity = (productId: string, weight: string, qty: number) => {
     if (qty <= 0) {
-      setCart((prev) => prev.filter((item) => item.product.id !== productId));
+      setCart((prev) =>
+        prev.filter((item) => !(item.product.id === productId && item.selectedOption.weight === weight))
+      );
     } else {
       setCart((prev) =>
-        prev.map((item) => (item.product.id === productId ? { ...item, quantity: qty } : item))
+        prev.map((item) =>
+          item.product.id === productId && item.selectedOption.weight === weight
+            ? { ...item, quantity: qty }
+            : item
+        )
       );
     }
   };
@@ -65,7 +73,6 @@ export const App: React.FC = () => {
   };
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const cartItemIds = cart.map((item) => item.product.id);
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -82,7 +89,7 @@ export const App: React.FC = () => {
       <main style={{ flex: 1 }}>
         <HeroSection onOpenPdfViewer={() => setIsPdfViewerOpen(true)} />
         <AboutSection />
-        <ProductCatalogue onAddToCart={handleAddToCart} cartItemIds={cartItemIds} />
+        <ProductCatalogue onAddToCart={handleAddToCart} cartItems={cart} />
         <OrderInfoSection />
       </main>
 

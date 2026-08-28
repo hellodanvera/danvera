@@ -46,7 +46,7 @@ export const OrderInfoSection: React.FC = () => {
             </div>
             <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Select Products</h3>
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-              Browse our 5 product chapters and click "Add to Order" to build your custom WhatsApp inquiry bag.
+              Browse our 6 product categories and click "Add to Order" to build your custom WhatsApp inquiry bag.
             </p>
           </div>
 

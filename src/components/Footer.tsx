@@ -125,14 +125,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPdfViewer }) => {
             </div>
           </div>
 
-          {/* Product Chapters */}
+          {/* Product Categories */}
           <div>
-            <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Catalogue Chapters</h4>
+            <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Product Categories</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.55rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
               {CHAPTERS.map(ch => (
                 <li key={ch.number}>
                   <a href="#catalogue" style={{ color: 'inherit', textDecoration: 'none' }}>
-                    Ch {ch.number}: {ch.title}
+                    {ch.title}
                   </a>
                 </li>
               ))}
