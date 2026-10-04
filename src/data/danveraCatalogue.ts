@@ -98,15 +98,15 @@ export const PRODUCTS: ProductItem[] = [
     ]
   },
   {
-    id: "curry-coriander-powder",
-    name: "Curry Coriander Powder",
+    id: "all-in-one-masala",
+    name: "All in One Masala",
     chapter: 1,
     chapterTitle: "Masala & Spice Powders",
     category: "Masala & Spice Powders",
-    description: "Our signature upgrade — coriander seeds slow-roasted with fresh curry leaves for a deeper, earthier aroma than the everyday version.",
-    imageUrl: "/products/curry-coriander-powder.png",
+    description: "Our signature all in one masala (Kari masala).",
+    imageUrl: "/products/all-in-one-masala.png",
     tag: "Signature Upgrade",
-    usageTip: "Use in curries, gravies, and stir-fries for an extra rich herbal aroma.",
+    usageTip: "Use in curries, gravies, and stir-fries for an extra rich aroma.",
     isPopular: true,
     priceOptions: [
       { weight: "250g", price: 240 },
@@ -327,13 +327,13 @@ export const PRODUCTS: ProductItem[] = [
     ]
   },
   {
-    id: "morinda-soup-mix",
-    name: "Morinda Soup Mix",
+    id: "moringa-soup-mix",
+    name: "Moringa Soup Mix",
     chapter: 3,
     chapterTitle: "Instant Mixes & Soups",
     category: "Instant Mixes & Soups",
-    description: "Nourishing Noni / Morinda leaf soup blend, crafted to boost vitality and natural immunity.",
-    imageUrl: "/products/morinda-soup-mix.png",
+    description: "Nourishing Noni / Moringa leaf soup blend, crafted to boost vitality and natural immunity.",
+    imageUrl: "/products/moringa-soup-mix.png",
     tag: "Immunity Soup",
     usageTip: "Whisk 1 tsp into boiling water, add salt & pepper, simmer for 3 mins.",
     priceOptions: [
@@ -518,7 +518,7 @@ export const PRODUCTS: ProductItem[] = [
   },
   {
     id: "jaggery-powder",
-    name: "Jaggery Powder 1kg",
+    name: "Jaggery Powder",
     chapter: 5,
     chapterTitle: "Natural Sweeteners & Syrups",
     category: "Natural Sweeteners & Syrups",
@@ -547,7 +547,7 @@ export const PRODUCTS: ProductItem[] = [
   },
   {
     id: "karupatti-essence",
-    name: "Karupatti Essence 250ml",
+    name: "Karupatti Essence",
     chapter: 5,
     chapterTitle: "Natural Sweeteners & Syrups",
     category: "Natural Sweeteners & Syrups",
@@ -561,11 +561,11 @@ export const PRODUCTS: ProductItem[] = [
   },
   {
     id: "rosemilk-essence",
-    name: "Panneer Rosemilk Essence 250ml",
+    name: "Rosemilk Essence",
     chapter: 5,
     chapterTitle: "Natural Sweeteners & Syrups",
     category: "Natural Sweeteners & Syrups",
-    description: "Crafted from fragrant panneer rose petals, distilled the traditional way into a rich, aromatic essence for authentic rose milk.",
+    description: "Crafted from fresh paneer rose petals, sourced from organic farms and carefully prepared to preserve their pure, authentic rose essence. Perfect for adding a delicate floral richness to rose milk and refreshing beverages.",
     imageUrl: "/products/rosemilk-essence.png",
     tag: "Panneer Rose Petals",
     usageTip: "Stir 1-2 drops into chilled milk with sweet basil seeds for nostalgic street-style rose milk.",

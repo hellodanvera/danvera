@@ -7,7 +7,7 @@ const outDir = path.join(__dirname, 'public', 'products');
 const mapping = {
   // Page 2
   'sambar-powder': 'img-000.png',
-  'curry-coriander-powder': 'img-001.png',
+  'all-in-one-masala': 'img-001.png',
   'instant-sambar-mix': 'img-002.png',
   'instant-rasam-mix': 'img-003.png',
 
