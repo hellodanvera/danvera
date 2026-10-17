@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Trash2, MessageCircle, Copy, Check, ShoppingBag, Plus, Minus, Instagram } from 'lucide-react';
-import { ProductItem, PriceOption, DANVERA_INFO } from '../data/danveraCatalogue';
+import { ProductItem, PriceOption, DANVERA_INFO, FESTIVE_CONFIG } from '../data/danveraCatalogue';
 
 export interface CartItem {
   product: ProductItem;
@@ -42,8 +42,11 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
       const lineSubtotal = item.selectedOption.price * item.quantity;
       text += `${index + 1}. ${item.product.name} (${item.selectedOption.weight}) - Qty: ${item.quantity} @ ₹${item.selectedOption.price} = ₹${lineSubtotal}\n`;
     });
-    text += `\n*Estimated Total Order Value: ₹${totalEstimate.toLocaleString('en-IN')}*\n`;
-    text += `\nPlease confirm product availability and shipping details.\n\nThank you!`;
+    text += `\n*Estimated Total Order Value: ₹${totalEstimate.toLocaleString('en-IN')}*`;
+    if (FESTIVE_CONFIG.isActive) {
+      text += ` (Includes 25% Diwali Discount)`;
+    }
+    text += `\n\nPlease confirm product availability and shipping details.\n\nThank you!`;
     return text;
   };
 
@@ -199,17 +202,24 @@ export const OrderCartDrawer: React.FC<OrderCartDrawerProps> = ({
               <div style={{
                 padding: '0.85rem 1rem',
                 borderRadius: '12px',
-                background: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.2)',
+                background: FESTIVE_CONFIG.isActive ? 'rgba(245, 158, 11, 0.08)' : 'rgba(16, 185, 129, 0.08)',
+                border: FESTIVE_CONFIG.isActive ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(16, 185, 129, 0.2)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 marginTop: '0.5rem'
               }}>
-                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Total Estimated Price
-                </span>
-                <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#10b981' }}>
+                <div>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>
+                    Total Estimated Price
+                  </span>
+                  {FESTIVE_CONFIG.isActive && (
+                    <span style={{ fontSize: '0.7rem', color: '#f59e0b', fontWeight: 700 }}>
+                      🎉 25% Diwali discount applied
+                    </span>
+                  )}
+                </div>
+                <span style={{ fontSize: '1.2rem', fontWeight: 900, color: FESTIVE_CONFIG.isActive ? '#f59e0b' : '#10b981' }}>
                   ₹{totalEstimate.toLocaleString('en-IN')}
                 </span>
               </div>

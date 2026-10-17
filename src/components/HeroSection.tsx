@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, MessageCircle, Instagram, BookOpen, Sparkles, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { DANVERA_INFO } from '../data/danveraCatalogue';
+import { DANVERA_INFO, FESTIVE_CONFIG } from '../data/danveraCatalogue';
 
 interface HeroSectionProps {
   onOpenPdfViewer: () => void;
@@ -38,8 +38,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenPdfViewer }) => 
           flexWrap: 'wrap',
           marginBottom: '1.25rem'
         }}>
+          {FESTIVE_CONFIG.isActive && (
+            <a
+              href="#diwali-specials"
+              className="badge-glow"
+              style={{
+                background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(239, 68, 68, 0.2) 100%)',
+                borderColor: 'rgba(245, 158, 11, 0.5)',
+                color: '#f59e0b',
+                textDecoration: 'none',
+                boxShadow: '0 0 15px rgba(245, 158, 11, 0.25)'
+              }}
+            >
+              <Sparkles size={14} />
+              <span>🪔 DIWALI SPECIALS &bull; 25% OFF</span>
+            </a>
+          )}
           <span className="badge-glow" style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)', color: '#10b981' }}>
-            <Sparkles size={14} />
             <span>{DANVERA_INFO.subTagline}</span>
           </span>
           <span className="badge-glow" style={{ background: 'rgba(245, 158, 11, 0.1)', borderColor: 'rgba(245, 158, 11, 0.3)', color: '#f59e0b' }}>

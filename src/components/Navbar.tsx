@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ShoppingBag, MessageCircle, Instagram, BookOpen, Mail, Sun, Moon, Menu, X } from 'lucide-react';
-import { DANVERA_INFO } from '../data/danveraCatalogue';
+import { DANVERA_INFO, FESTIVE_CONFIG } from '../data/danveraCatalogue';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -89,6 +89,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Desktop Navigation Links */}
         <div className="hide-mobile" style={{ alignItems: 'center', gap: '1.75rem' }}>
+          {FESTIVE_CONFIG.isActive && (
+            <a href="#diwali-specials" style={{ color: '#f59e0b', textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }}>
+              <span>🪔 Diwali Specials</span>
+              <span style={{ fontSize: '0.675rem', background: 'rgba(245, 158, 11, 0.2)', border: '1px solid rgba(245, 158, 11, 0.4)', color: '#f59e0b', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 800 }}>25% OFF</span>
+            </a>
+          )}
           <a href="#ethos" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', transition: 'color 0.2s' }}>
             Our Ethos
           </a>
@@ -240,6 +246,30 @@ export const Navbar: React.FC<NavbarProps> = ({
             boxShadow: 'var(--shadow-card)'
           }}
         >
+          {FESTIVE_CONFIG.isActive && (
+            <a
+              href="#diwali-specials"
+              onClick={() => setIsMobileMenuOpen(false)}
+              style={{
+                color: '#fbbf24',
+                textDecoration: 'none',
+                fontWeight: 800,
+                fontSize: '1rem',
+                padding: '0.65rem 0.85rem',
+                borderRadius: '8px',
+                background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%)',
+                border: '1px solid rgba(245, 158, 11, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <span>🪔 Diwali Specials</span>
+              <span style={{ fontSize: '0.75rem', background: '#f59e0b', color: '#000', padding: '0.15rem 0.45rem', borderRadius: '4px', fontWeight: 800 }}>
+                25% OFF
+              </span>
+            </a>
+          )}
           <a
             href="#ethos"
             onClick={() => setIsMobileMenuOpen(false)}

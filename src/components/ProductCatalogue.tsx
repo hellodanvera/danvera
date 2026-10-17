@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Plus, Check, Sparkles, ShoppingBag, Info, Tag } from 'lucide-react';
-import { PRODUCTS, CHAPTERS, ProductItem, PriceOption } from '../data/danveraCatalogue';
+import { PRODUCTS, CHAPTERS, ProductItem, PriceOption, FESTIVE_CONFIG } from '../data/danveraCatalogue';
 import { CartItem } from './OrderCartDrawer';
 
 interface ProductCatalogueProps {
@@ -47,6 +47,25 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
           <p style={{ fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto' }}>
             Explore Danvera's authentic product range with clear weights and transparent pricing. Select your weight option and click "Add to Order" to build a pre-formatted WhatsApp order inquiry!
           </p>
+
+          {FESTIVE_CONFIG.isActive && (
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%)',
+              border: '1px solid rgba(245, 158, 11, 0.35)',
+              padding: '0.45rem 1.1rem',
+              borderRadius: '9999px',
+              color: '#fbbf24',
+              fontSize: '0.85rem',
+              fontWeight: 800,
+              marginTop: '1rem',
+              boxShadow: '0 0 20px rgba(245, 158, 11, 0.2)'
+            }}>
+              <span>🪔 Diwali Special: Temporary 25% discount already applied to all products!</span>
+            </div>
+          )}
         </div>
 
         {/* Search & Category Bar */}
@@ -326,12 +345,41 @@ export const ProductCatalogue: React.FC<ProductCatalogueProps> = ({ onAddToCart,
                   gap: '0.5rem'
                 }}>
                   <div>
-                    <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#10b981', lineHeight: 1 }}>
-                      ₹{currentOption.price}
-                    </div>
-                    <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
-                      per {currentOption.weight}
-                    </div>
+                    {FESTIVE_CONFIG.isActive && currentOption.originalPrice && currentOption.originalPrice > currentOption.price ? (
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '1.25rem', fontWeight: 900, color: '#f59e0b', lineHeight: 1 }}>
+                            ₹{currentOption.price}
+                          </span>
+                          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
+                            ₹{currentOption.originalPrice}
+                          </span>
+                          <span style={{
+                            fontSize: '0.625rem',
+                            background: 'rgba(245, 158, 11, 0.2)',
+                            border: '1px solid rgba(245, 158, 11, 0.4)',
+                            color: '#f59e0b',
+                            padding: '0.1rem 0.35rem',
+                            borderRadius: '4px',
+                            fontWeight: 800
+                          }}>
+                            25% OFF
+                          </span>
+                        </div>
+                        <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          per {currentOption.weight}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#10b981', lineHeight: 1 }}>
+                          ₹{currentOption.price}
+                        </div>
+                        <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
+                          per {currentOption.weight}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <button

@@ -1,7 +1,21 @@
 export interface PriceOption {
   weight: string;
   price: number;
+  originalPrice?: number;
 }
+
+/**
+ * Festive Season Configuration
+ * ====================================================
+ * Set `isActive: true` to enable Diwali banners and 25% discount across all products.
+ * Set `isActive: false` after the festival to instantly revert all prices back to normal
+ * and hide all festival posters/links automatically!
+ */
+export const FESTIVE_CONFIG = {
+  isActive: true, // <-- SET TO false AFTER FESTIVAL TO REMOVE POSTERS & REVERT REGULAR PRICES
+  festivalName: "Diwali Specials",
+  discountPercent: 25,
+};
 
 export interface ProductItem {
   id: string;
@@ -78,7 +92,7 @@ export const CHAPTERS: ChapterInfo[] = [
   }
 ];
 
-export const PRODUCTS: ProductItem[] = [
+const RAW_PRODUCTS: ProductItem[] = [
   // Chapter 1: Masala & Spice Powders
   {
     id: "sambar-powder",
@@ -556,7 +570,7 @@ export const PRODUCTS: ProductItem[] = [
     tag: "Liquid Syrup",
     usageTip: "Drizzle over pancakes, appam, ice cream, or stir directly into South Indian filter coffee.",
     priceOptions: [
-      { weight: "250ml", price: 180 }
+      { weight: "250ml", price: 200 }
     ]
   },
   {
@@ -647,3 +661,15 @@ export const PRODUCTS: ProductItem[] = [
     ]
   }
 ];
+
+export const PRODUCTS: ProductItem[] = RAW_PRODUCTS.map((prod) => ({
+  ...prod,
+  priceOptions: prod.priceOptions.map((opt) => ({
+    ...opt,
+    originalPrice: opt.price,
+    price: FESTIVE_CONFIG.isActive
+      ? Math.round(opt.price * (1 - FESTIVE_CONFIG.discountPercent / 100))
+      : opt.price
+  }))
+}));
+

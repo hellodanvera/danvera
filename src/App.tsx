@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { DiwaliBannerShowcase } from './components/DiwaliBannerShowcase';
 import { AboutSection } from './components/AboutSection';
 import { ProductCatalogue } from './components/ProductCatalogue';
 import { OrderInfoSection } from './components/OrderInfoSection';
 import { OrderCartDrawer, CartItem } from './components/OrderCartDrawer';
 import { PdfCatalogueViewer } from './components/PdfCatalogueViewer';
 import { Footer } from './components/Footer';
-import { ProductItem, PriceOption } from './data/danveraCatalogue';
+import { ProductItem, PriceOption, FESTIVE_CONFIG } from './data/danveraCatalogue';
 
 export const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -88,6 +89,7 @@ export const App: React.FC = () => {
       {/* Main Content */}
       <main style={{ flex: 1 }}>
         <HeroSection onOpenPdfViewer={() => setIsPdfViewerOpen(true)} />
+        {FESTIVE_CONFIG.isActive && <DiwaliBannerShowcase />}
         <AboutSection />
         <ProductCatalogue onAddToCart={handleAddToCart} cartItems={cart} />
         <OrderInfoSection />
