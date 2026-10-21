@@ -201,7 +201,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     chapterTitle: "Podis & Thokkus",
     category: "Podis & Thokkus",
     description: "The traditional South Indian gunpowder blend of roasted urad dal, chana dal, sesame seeds and red chillies.",
-    imageUrl: "/products/groundnut-idli-podi.png",
+    imageUrl: "/products/classic-idli-podi.png",
     tag: "Breakfast Staple",
     usageTip: "Mix generously with gingelly oil or ghee and dip hot idlis.",
     priceOptions: [
