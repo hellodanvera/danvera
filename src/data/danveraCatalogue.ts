@@ -95,6 +95,24 @@ export const CHAPTERS: ChapterInfo[] = [
 const RAW_PRODUCTS: ProductItem[] = [
   // Chapter 1: Masala & Spice Powders
   {
+    id: "turmeric-powder",
+    name: "Turmeric Powder",
+    chapter: 1,
+    chapterTitle: "Masala & Spice Powders",
+    category: "Masala & Spice Powders",
+    description: "Pure, high-curcumin farm turmeric root, stone-ground to preserve vibrant color and authentic aroma.",
+    imageUrl: "/products/turmeric-powder.png",
+    tag: "Pure Farm Spice",
+    usageTip: "Pinch into daily warm milk, curries, and lentil tadka.",
+    isPopular: true,
+    priceOptions: [
+      { weight: "100g", price: 100 },
+      { weight: "250g", price: 250 },
+      { weight: "500g", price: 500 },
+      { weight: "1kg", price: 1000 }
+    ]
+  },
+  {
     id: "sambar-powder",
     name: "Sambar Powder",
     chapter: 1,
@@ -129,24 +147,6 @@ const RAW_PRODUCTS: ProductItem[] = [
     ]
   },
   {
-    id: "turmeric-powder",
-    name: "Turmeric Powder",
-    chapter: 1,
-    chapterTitle: "Masala & Spice Powders",
-    category: "Masala & Spice Powders",
-    description: "Pure, high-curcumin farm turmeric root, stone-ground to preserve vibrant color and authentic aroma.",
-    imageUrl: "/products/turmeric-powder.png",
-    tag: "Pure Farm Spice",
-    usageTip: "Pinch into daily warm milk, curries, and lentil tadka.",
-    isPopular: true,
-    priceOptions: [
-      { weight: "100g", price: 100 },
-      { weight: "250g", price: 250 },
-      { weight: "500g", price: 500 },
-      { weight: "1kg", price: 1000 }
-    ]
-  },
-  {
     id: "red-chilli-powder",
     name: "Red Chilli Powder",
     chapter: 1,
@@ -159,6 +159,23 @@ const RAW_PRODUCTS: ProductItem[] = [
     priceOptions: [
       { weight: "100g", price: 100 },
       { weight: "250g", price: 250 }
+    ]
+  },
+  {
+    id: "coriander-powder",
+    name: "Coriander Powder",
+    chapter: 1,
+    chapterTitle: "Masala & Spice Powders",
+    category: "Masala & Spice Powders",
+    description: "An addition to any gravy or fry for a better flavour.",
+    imageUrl: "/products/coriander-powder.png",
+    tag: "Signature Upgrade",
+    usageTip: "Use in curries, gravies, and stir-fries for an extra rich aroma.",
+    isPopular: true,
+    priceOptions: [
+      { weight: "250g", price: 190 },
+      { weight: "500g", price: 370 },
+      { weight: "1kg", price: 870 }
     ]
   },
 
